@@ -6,9 +6,7 @@ dataset = dataset[3:5]
 
 # Encoding the target feature as factor
 dataset$Purchased = factor(dataset$Purchased, levels = c(0, 1)) #labels /levels -both are same
-                        #Some methods already consider their independent variable as a factor, for example, 
-                        #logistic regression.But, Naive Bayes doesnt consider as factor
-
+                     
 # Splitting the dataset into the Training set and Test set
 # install.packages('caTools')
 library(caTools)
@@ -24,7 +22,7 @@ test_set[-3] = scale(test_set[-3])
 # Fitting Naive Bayes to the Training set
 library(e1071)
 classifier = naiveBayes(x = training_set[-3],
-                        y = training_set$Purchased) #here we dont need to mention formula
+                        y = training_set$Purchased) 
 
 # Predicting the Test set results
 y_pred = predict(classifier, newdata = test_set[-3])
