@@ -22,9 +22,9 @@ test_set[-3] = scale(test_set[-3])
 # Fitting Random Forest Classification to the Training set
 library(randomForest)
 classifier = randomForest(x = training_set[-3],
-                          y = training_set$Purchased, #dont use training_set[3]-bcoz purchased target variable-has to be encoded
-                          ntree = 10)                 #as a factor and vector(for which we use $)-only then it will understand
-                                                      #as classification,othewise it will think as regression
+                          y = training_set$Purchased, 
+                          ntree = 10)                 
+                                                     
 # Predicting the Test set results
 y_pred = predict(classifier, newdata = test_set[-3])
 y_pred
