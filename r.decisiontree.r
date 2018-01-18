@@ -15,7 +15,7 @@ split = sample.split(dataset$Purchased, SplitRatio = 0.75)
 training_set = subset(dataset, split == TRUE)
 test_set = subset(dataset, split == FALSE)
 
-# Feature Scaling #no need to scale,but to visualise in high resolution if we scale it results will be fast otherwise code may break
+# Feature Scaling #no need to scale,but to visualise in high resolution if we scale, the results will be fast otherwise code may break
 training_set[-3] = scale(training_set[-3])
 test_set[-3] = scale(test_set[-3])
 
@@ -25,8 +25,7 @@ classifier = rpart(formula = Purchased ~ .,
                    data = training_set)
 
 # Predicting the Test set results
-#y_pred = predict(classifier, newdata = test_set[-3]) #gives matrix of two columns- gives the prob of user belong to class 0 and 1(sum = 1)
-y_pred = predict(classifier, newdata = test_set[-3], type = 'class') # add type = class, gives the vector of y_pred(one column)
+y_pred = predict(classifier, newdata = test_set[-3], type = 'class') 
 
 # Making the Confusion Matrix
 cm = table(test_set[, 3], y_pred)
@@ -65,6 +64,6 @@ points(set, pch = 21, bg = ifelse(set[, 3] == 1, 'green4', 'red3'))
 #plotting the decision tree # to run this code,dont use feature scaling step
 plot(classifier)
 text(classifier)
-#library(rpart.plot)  #use these two codes for better tree
-#fancyRpartPlot(classifier)
-                            #find the use of rattle and caret packages??                                 
+library(rpart.plot) 
+fancyRpartPlot(classifier)
+                                                         
